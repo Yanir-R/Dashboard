@@ -19,6 +19,9 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../listitems/listitems'
 import { Deposits } from '../deposits/deposits';
 import { Orders } from '../orders/orders';
+import { Userlogs } from '../userlogs/userlogs';
+import { ThemeProvider } from '@material-ui/styles'
+import { Box, createMuiTheme } from '@material-ui/core'
 
 interface dashboardProps { }
 const drawerWidth = 240;
@@ -71,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
+    timeStampCenter: {
+        flexGrow: 1
+    },
     drawerPaperClose: {
         overflowX: 'hidden',
         transition: theme.transitions.create('width', {
@@ -102,6 +108,15 @@ const useStyles = makeStyles((theme) => ({
         height: 240,
     },
 }));
+const darkTheme = createMuiTheme({ palette: { type: 'dark' } })
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+const days = ['Sunday', ' Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const timeStemp = (): string => {
+    const d = new Date()
+    const dateTime = d.toLocaleTimeString('en-US') + ' ' + days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getMonth() + ' ' + d.getFullYear()
+    return dateTime
+
+}
 
 export const Dashboard: React.FC<dashboardProps> = () => {
     const classes = useStyles();
@@ -116,70 +131,80 @@ export const Dashboard: React.FC<dashboardProps> = () => {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-                <Toolbar className={classes.toolbar}>
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        Dashboard
+            <ThemeProvider theme={darkTheme} >
+                <CssBaseline />
+                <AppBar color="inherit" position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+                    <Toolbar className={classes.toolbar}>
+                        <IconButton
+                            edge="start"
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                            Dashboard
             </Typography>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                variant="permanent"
-                classes={{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                }}
-                open={open}
-            >
-                <div className={classes.toolbarIcon}>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon />
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>{mainListItems}</List>
-                <Divider />
-                <List>{secondaryListItems}</List>
-            </Drawer>
-            <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
-                    <Grid container spacing={3}>
-                        {/* Chart */}
-                        <Grid item xs={12} md={8} lg={9}>
-                            <Paper className={fixedHeightPaper}>
+                        <Box className={classes.timeStampCenter}>
+                            {timeStemp()}
+                        </Box>
+                        <IconButton color="inherit">
+                            <Badge badgeContent={4} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    variant="permanent"
+                    classes={{
+                        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+                    }}
+                    open={open}
+                >
+                    <div className={classes.toolbarIcon}>
+                        <IconButton onClick={handleDrawerClose}>
+                            <ChevronLeftIcon />
+                        </IconButton>
+                    </div>
+                    <Divider />
+                    <List>{mainListItems}</List>
+                    <Divider />
+                    <List>{secondaryListItems}</List>
+                </Drawer>
+                <main className={classes.content}>
+                    <div className={classes.appBarSpacer} />
+                    <Container maxWidth={false} className={classes.container}>
+                        <Grid container spacing={2}>
+                            {/* Chart */}
+                            <Grid item xs={12} md={6} lg={5}>
+                                <Paper className={fixedHeightPaper}>
 
-                            </Paper>
+                                </Paper>
+                            </Grid>
+                            {/* Recent Deposits */}
+                            <Grid item xs={12} md={2} lg={2}>
+                                <Paper className={fixedHeightPaper}>
+                                    <Deposits />
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12} md={4} lg={5}>
+                                <Paper className={fixedHeightPaper}>
+                                    <Userlogs />
+                                </Paper>
+                            </Grid>
+                            {/* Recent Orders */}
+                            <Grid item xs={12}>
+                                <Paper className={classes.paper}>
+                                    <Orders />
+                                </Paper>
+                            </Grid>
                         </Grid>
-                        {/* Recent Deposits */}
-                        <Grid item xs={12} md={4} lg={3}>
-                            <Paper className={fixedHeightPaper}>
-                                <Deposits />
-                            </Paper>
-                        </Grid>
-                        {/* Recent Orders */}
-                        <Grid item xs={12}>
-                            <Paper className={classes.paper}>
-                                <Orders />
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </main>
+                    </Container>
+                </main>
+            </ThemeProvider>
         </div>
     );
 }
