@@ -9,19 +9,18 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../listitems/listitems'
 import { Deposits } from '../deposits/deposits';
 import { Orders } from '../orders/orders';
 import { Userlogs } from '../userlogs/userlogs';
 import { ThemeProvider } from '@material-ui/styles'
-import { Box, createMuiTheme } from '@material-ui/core'
+import { Avatar, Box, createMuiTheme } from '@material-ui/core'
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 interface dashboardProps { }
 const drawerWidth = 240;
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'flex-end',
         padding: '0 8px',
         ...theme.mixins.toolbar,
-
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -75,7 +73,14 @@ const useStyles = makeStyles((theme) => ({
         }),
     },
     timeStampCenter: {
-        flexGrow: 1
+        flexGrow: 1,
+    },
+    sectionDesktop: {
+        display: "none",
+        paddingLeft: `calc(1em)`,
+        [theme.breakpoints.up("md")]: {
+            display: "flex"
+        }
     },
     drawerPaperClose: {
         overflowX: 'hidden',
@@ -106,6 +111,13 @@ const useStyles = makeStyles((theme) => ({
     },
     fixedHeight: {
         height: 240,
+    },
+    avatarCSS: {
+        display: 'flex',
+        '& > *': {
+            margin: theme.spacing(1),
+            padding: '0 8px',
+        },
     },
 }));
 const darkTheme = createMuiTheme({ palette: { type: 'dark' } })
@@ -150,11 +162,27 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                         <Box className={classes.timeStampCenter}>
                             {timeStemp()}
                         </Box>
-                        <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
+                        <div className={classes.sectionDesktop}>
+                            <Avatar
+                                alt="Remy Sharp"
+                                src="https://media-exp1.licdn.com/dms/image/C4E03AQF0Nes7_HyWxg/profile-displayphoto-shrink_800_800/0/1605374881632?e=1620259200&v=beta&t=3LMpueN_31ny1XQxP3vciv27Oi3OoMckXdQNKOqEAG8"
+                            />
+                        </div>
+                        <div className={classes.sectionDesktop}>
+                            <Typography className={classes.title} variant="body1" noWrap>
+                                Material-UI
+            </Typography>
+                        </div>
+                        <div className={classes.sectionDesktop}>
+                            <IconButton
+                                aria-label="account of current user"
+                                aria-controls="primary-search-account-menu"
+                                aria-haspopup="true"
+                                color="inherit"
+                            >
+                                <KeyboardArrowDownIcon />
+                            </IconButton>
+                        </div>
                     </Toolbar>
                 </AppBar>
                 <Drawer
