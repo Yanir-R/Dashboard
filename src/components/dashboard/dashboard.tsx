@@ -12,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems, secondaryListItems } from '../listitems/listitems'
 import { Deposits } from '../deposits/deposits';
@@ -21,6 +20,8 @@ import { Userlogs } from '../userlogs/userlogs';
 import { ThemeProvider } from '@material-ui/styles'
 import { Avatar, Box, createMuiTheme } from '@material-ui/core'
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import { CardHolder } from '../Card/cardHolder';
+
 
 interface dashboardProps { }
 const drawerWidth = 240;
@@ -56,9 +57,12 @@ const useStyles = makeStyles((theme) => ({
     },
     menuButton: {
         marginRight: 36,
+        backgroundColor: 'white',
     },
     menuButtonHidden: {
         display: 'none',
+
+
     },
     title: {
         flexGrow: 1,
@@ -106,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(2),
         display: 'flex',
-        overflow: 'auto',
+        overflow: 'hidden',
         flexDirection: 'column',
     },
     fixedHeight: {
@@ -154,7 +158,7 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                             onClick={handleDrawerOpen}
                             className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                         >
-                            <MenuIcon />
+                            <Avatar src="https://www.enigma-securities.io/static/media/Logo_mask_mobile.bf269681.png" />
                         </IconButton>
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                             Dashboard
@@ -164,7 +168,7 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                         </Box>
                         <div className={classes.sectionDesktop}>
                             <Avatar
-                                alt="Remy Sharp"
+                                alt="Yanir"
                                 src="https://media-exp1.licdn.com/dms/image/C4E03AQF0Nes7_HyWxg/profile-displayphoto-shrink_800_800/0/1605374881632?e=1620259200&v=beta&t=3LMpueN_31ny1XQxP3vciv27Oi3OoMckXdQNKOqEAG8"
                             />
                         </div>
@@ -224,11 +228,22 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                                 </Paper>
                             </Grid>
                             {/* Recent Orders */}
-                            <Grid item xs={12}>
+                            <Grid item xs={12} md={4} lg={4}>
+
+                                <Box m={1}>
+                                    <CardHolder />
+                                </Box>
+                                <Box m={1}>
+                                    <CardHolder />
+                                </Box >
+
+                            </Grid>
+                            <Grid item xs={12} md={6} lg={8}>
                                 <Paper className={classes.paper}>
                                     <Orders />
                                 </Paper>
                             </Grid>
+
                         </Grid>
                     </Container>
                 </main>

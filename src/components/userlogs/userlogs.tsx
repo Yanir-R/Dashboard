@@ -8,15 +8,16 @@ interface depositsProps { }
 export const Userlogs: React.FC<depositsProps> = () => {
   const { data } = useDemoData({
     dataSet: 'Commodity',
-    rowLength: 5,
-    maxColumns: 6,
+    rowLength: 3,
+    maxColumns: 3,
   })
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+   
+    <div style={{ height: 220, width: '100%' }}>
       <div style={{ display: 'flex', height: '100%' }}>
         <div style={{ flexGrow: 1 }}>
-          <DataGrid {...data} sortingMode={'client'} />
+          <DataGrid {...data} sortingMode={'client'}     />
         </div>
       </div>
     </div>
