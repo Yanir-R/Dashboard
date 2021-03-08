@@ -6,6 +6,7 @@ interface depositsProps { }
 const useStyles = makeStyles({
   depositContext: {
     flex: 1,
+    
   },
 });
 export const Deposits: React.FC<depositsProps> = () => {

@@ -209,9 +209,9 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
                     <Container maxWidth={false} className={classes.container}>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={1}>
                             {/* Chart */}
-                            <Grid item xs={12} md={6} lg={5}>
+                            <Grid item xs={12} md={4} lg={6}>
                                 <Paper className={fixedHeightPaper}>
 
                                 </Paper>
@@ -222,26 +222,31 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                                     <Deposits />
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} md={4} lg={5}>
-                                <Paper className={fixedHeightPaper}>
+                            <Grid item xs={12} md={6} lg={4}>
+                                <Paper className={fixedHeightPaper} >
                                     <Userlogs />
                                 </Paper>
                             </Grid>
                             {/* Recent Orders */}
-                            <Grid item xs={12} md={4} lg={4}>
-
-                                <Box m={1}>
+                            <Grid item xs={12} md={4} lg={2}>
+                                <Box>
                                     <CardHolder />
                                 </Box>
-                                <Box m={1}>
+                                <Box mt={1}>
+                                    <CardHolder />
+                                </Box >
+                            </Grid>
+                            <Grid item xs={12} md={4} lg={8}>
+                                <Orders />
+                            </Grid>
+                            <Grid item xs={12} md={4} lg={2} >
+                                <Box >
+                                    <CardHolder />
+                                </Box>
+                                <Box mt={1}>
                                     <CardHolder />
                                 </Box >
 
-                            </Grid>
-                            <Grid item xs={12} md={6} lg={8}>
-                                <Paper className={classes.paper}>
-                                    <Orders />
-                                </Paper>
                             </Grid>
 
                         </Grid>
