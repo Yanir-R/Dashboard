@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const Orders: React.FC = () => {
+export const Graph: React.FC = () => {
   const classes = useStyles();
   return (
     <Card>

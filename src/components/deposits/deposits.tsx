@@ -1,25 +1,38 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { Title } from '../title/title';
-interface depositsProps { }
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+interface depositsProps {
+}
 const useStyles = makeStyles({
-  depositContext: {
-    flex: 1,
-    
+  root: {
+    flexGrow: 1,
   },
 });
+
 export const Deposits: React.FC<depositsProps> = () => {
   const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
   return (
-    <React.Fragment>
-      <Title>Recent Deposits</Title>
-      <Typography component="p" variant="h4">
-        $3,024.00
-        </Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
-        </Typography>
-    </React.Fragment>
+    <Paper className={classes.root}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab label="Sell" />
+        <Tab label="Buy" />
+
+      </Tabs>
+    </Paper>
   );
 }

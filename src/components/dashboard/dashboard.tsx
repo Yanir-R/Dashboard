@@ -15,12 +15,13 @@ import Paper from '@material-ui/core/Paper';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems, secondaryListItems } from '../listitems/listitems'
 import { Deposits } from '../deposits/deposits';
-import { Orders } from '../orders/orders';
-import { Userlogs } from '../userlogs/userlogs';
+import { Graph } from '../graph/graph';
+import { UserLogs } from '../userLogs/userLogs';
 import { ThemeProvider } from '@material-ui/styles'
 import { Avatar, Box, createMuiTheme } from '@material-ui/core'
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { CardHolder } from '../Card/cardHolder';
+import { DashboardNavbar } from '../dashboardNavbar/dashboardNavbar';
 
 
 interface dashboardProps { }
@@ -208,7 +209,11 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
+                    <DashboardNavbar />
                     <Container maxWidth={false} className={classes.container}>
+
+
+
                         <Grid container spacing={1}>
                             {/* Chart */}
                             <Grid item xs={12} md={4} lg={6}>
@@ -224,7 +229,7 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                             </Grid>
                             <Grid item xs={12} md={6} lg={4}>
                                 <Paper className={fixedHeightPaper} >
-                                    <Userlogs />
+                                    <UserLogs />
                                 </Paper>
                             </Grid>
                             {/* Recent Orders */}
@@ -237,7 +242,7 @@ export const Dashboard: React.FC<dashboardProps> = () => {
                                 </Box >
                             </Grid>
                             <Grid item xs={12} md={4} lg={8}>
-                                <Orders />
+                                <Graph />
                             </Grid>
                             <Grid item xs={12} md={4} lg={2} >
                                 <Box >
